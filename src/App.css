@@ -3,14 +3,26 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 8vmin;
   pointer-events: none;
+  align-items:flex-start
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  /* .App-logo {
     animation: App-logo-spin infinite 20s linear;
-  }
+  } */
+}
+
+.banner{
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
 }
 
 .App-header {
@@ -35,4 +47,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.AppBarTitle {
+    flex-grow: 1;
+    font-family: 'Poppins';
+    /* color:#f54272; */
+}
+
+
+@media screen and (min-width: 601px) {
+  .AppBarTitle {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .AppBarTitle {
+    font-size: 16px;
+ }
 }
