@@ -1,5 +1,7 @@
 import './App.css';
 
+import { useState, useEffect } from 'react'
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,7 +27,9 @@ import CAPImage from './assets/cap.jpg'
 import FosterImage from './assets/foster.jpg'
 
 import DonateCard from './components/DonateCard'
-import Carousel from './components/CarouselHome'
+import Carousel from './components/NewsCarousel'
+import About from './components/About'
+
 
 
 const donate_card_message = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
@@ -101,7 +105,6 @@ const useStyles = makeStyles((theme) => ({
   },
   carousel:{
     flexGrow: 1,
-    alignItems:'left',
     padding:'20px 20px 20px 20px ',
   }
 
@@ -111,6 +114,29 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 
   const classes = useStyles();
+
+  const [news, setNews] = useState([{"title":"","description":"","img_uri":""}])
+
+  useEffect(() => {
+    const getNews = async () => {
+      const newsFromServer = await fetchNews()
+      setNews(newsFromServer)
+
+    }
+
+    getNews()
+  }, [])
+
+
+    // Fetch all News
+    const fetchNews = async () => {
+      
+      const res = await fetch(process.env.REACT_APP_API_URL)
+      const data = await res.json()
+      return data
+    }
+
+
 
   return (
     <div className="App">
@@ -198,20 +224,20 @@ function App() {
 
       <Divider/>
 
-      <Grid container className={classes.root} spacing={2} >
+ 
+      <Container  className={classes.carousel}>
 
-      <Grid item xs={12}>
-
-      <Container maxWidth="md" className={classes.carousel}>
-
-       <Carousel/>
+       <Carousel news={news}/>
 
       </Container>
 
-      </Grid>
+      <Divider/>
 
-      
-      </Grid>
+      <Container  className={classes.carousel}>
+
+      <About/>
+
+      </Container>
 
     </div>
   );

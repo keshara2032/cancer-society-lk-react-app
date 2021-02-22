@@ -14,6 +14,9 @@
   } */
 }
 
+.about{
+  background-image: url(./assets/about.png);
+}
 .banner{
   margin: 0 auto;
   width: 100%;
