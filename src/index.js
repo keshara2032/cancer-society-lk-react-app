@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+
 require('dotenv').config()
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+        main: "#ad0045" // This is an orange looking color
+              },
+    secondary: {
+        main: "#ad0045" //Another orange-ish color
+                }
+          },
+fontFamily: 'Poppins',
+fontWeight: 'fontWeightLight',
+alignItems: 'center',
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <ThemeProvider theme={theme}><App />
+  </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

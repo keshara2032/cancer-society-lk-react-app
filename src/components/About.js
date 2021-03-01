@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
-
+import Hidden from '@material-ui/core/Hidden'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
       flex: '1 0 auto',
-      margin:theme.spacing(3),
 
     },
     cover: {
       width: "100%",
+      padding:20
     },
     controls: {
       display: 'flex',
@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
     title:{
       paddingBottom: theme.spacing(4),
       fontFamily: 'Poppins',
-      fontWeight: 'fontWeightMedium'
+      fontWeight: 'fontWeightMedium',
+      alignItems: 'center',
+    color:"#f54272",
     }
   }));
 
@@ -59,7 +61,7 @@ const About = () => {
         <Card className={classes.root}>
         <Container className={classes.details}>
           <CardContent className={classes.content}>
-            <Typography component="h3" variant="h3" className={classes.title}>
+            <Typography component="h4" variant="h4" className={classes.title}>
               Established in 1972
             </Typography>
             <Container>
@@ -75,11 +77,14 @@ const About = () => {
 
           </CardContent>
         </Container>
+        
+        <Hidden xsDown>
         <CardMedia
           className={classes.cover}
           image={AboutImage}
-          title="Live from space album cover"
         />
+        </Hidden>
+
       </Card>
     )
 }

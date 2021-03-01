@@ -13,8 +13,9 @@ import HomeBanner from './assets/homebanner.png'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 import CancerLogo from './assets/cancerlogo.png'
 import CancerLogo2 from './assets/cancer_logo.png'
@@ -29,7 +30,9 @@ import FosterImage from './assets/foster.jpg'
 import DonateCard from './components/DonateCard'
 import Carousel from './components/NewsCarousel'
 import About from './components/About'
-
+import Footer from './components/Footer'
+import Admin from './components/Admin'
+import NewsAdminPanel from './components/NewsAdminPanel';
 
 
 const donate_card_message = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
@@ -40,6 +43,7 @@ const card3 = { title: "Donate for Awareness",  msg: donate_card_message, img:CA
 const card4 = { title: "Donate for Foster Parents",  msg: donate_card_message, img:FosterImage }
 
 const cards = [card1,card2,card3,card4]
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -73,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
   donatebtn:{
     flexGrow: 1,
     fontFamily: 'Poppins',
-    color:"#f54272",
-    fontWeight: 'fontWeightBold'
+    fontWeight: 'fontWeightLight',
+    alignItems: 'center',
     
   },
   navbar:{
@@ -113,133 +117,232 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 
+
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+            main: "#ad0045" // This is an orange looking color
+                  },
+        secondary: {
+            main: "#ad0045" //Another orange-ish color
+                    }
+              },
+  fontFamily: 'Poppins',
+  fontWeight: 'fontWeightLight',
+  alignItems: 'center',
+  });
+
+
   const classes = useStyles();
 
   const [news, setNews] = useState([{"title":"","description":"","img_uri":""}])
+  const [showNews, setShowNews] = useState(false)
+  const [isAuthenticated, setAuthenticated] = useState(false)
+
 
   useEffect(() => {
     const getNews = async () => {
       const newsFromServer = await fetchNews()
-      setNews(newsFromServer)
+      if(newsFromServer.length == 0 || newsFromServer.status != 200){
+        setShowNews(false)
+      }else{
+        setShowNews(true)
+        setNews(newsFromServer)
+      }
 
     }
-
     getNews()
   }, [])
 
+  
+  useEffect(() => {
+    const authenticate = async () => {
+      const authenticationStatus = await authenticateUser()
+      if(authenticationStatus.status == 200){
+        setAuthenticated(true)
+      }else{
+        setAuthenticated(false)
+      }
 
-    // Fetch all News
-    const fetchNews = async () => {
-      
-      const res = await fetch(process.env.REACT_APP_API_URL)
-      const data = await res.json()
-      return data
     }
+    authenticate()
+  }, [])
+
+
+  // Fetch all News
+  const authenticateUser = async () => {
+    
+    const requestOptions = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': ' application/json',
+        'Authorization': "Bearer "+localStorage.getItem('Token')
+              },
+  };
+    
+
+    const res = await fetch("http://localhost:8080/api/authenticate",requestOptions)
+    const data = await res.json()
+
+    return data
+
+  }
+
+
+
+
+
+  //Handle Authentication
+  const authenticate = (b) => {
+    setAuthenticated(b)
+  }
+
+
+  // Fetch all News
+  const fetchNews = async () => {
+    
+    const requestOptions = {
+      headers: {
+        'Accept': 'application/json',
+          'Content-Type': ' application/json',
+              },
+  };
+    
+    const res = await fetch("http://localhost:8080/api/news",requestOptions)
+    const data = await res.json()
+
+    console.log(data)
+    return data
+
+  }
 
 
 
   return (
-    <div className="App">
+    <Router>
 
-      <AppBar position="static" color="transparent" className={classes.appbar}  elevation={0}>
-        <Toolbar >
-          <img src={CancerLogo} className="App-logo"/>
+      <Route path='/' exact>
+ 
+        <div className="App">
 
-          <Container maxWidth="sm">
+          <AppBar position="static" color="transparent" className={classes.appbar}  elevation={0}>
+            <Toolbar >
+              <img src={CancerLogo} className="App-logo"/>
 
-          <h5 className="AppBarTitle">
-            Sri Lanka Cancer Society
-          </h5>
+              <Container maxWidth="sm">
+
+              <h5 className="AppBarTitle">
+                Sri Lanka Cancer Society
+              </h5>
+
+              </Container>
+
+              <img src={CancerLogo2} className="App-logo"/>
+            </Toolbar>
+
+
+            <Toolbar className={classes.navbar} >
+              <Container maxWidth="sm" >
+
+                  <Button color="inherit" >
+                    <Typography variant="subtitle1" className={classes.navbtns}>
+                      Home
+                    </Typography>
+                  </Button>
+
+                  <Button color="inherit">
+                    <Typography variant="subtitle1" className={classes.navbtns}>
+                      Services
+                    </Typography>
+                  </Button>
+
+                  <Button color="inherit">
+                    <Typography variant="subtitle1" className={classes.navbtns}>
+                      News
+                    </Typography>
+                    </Button>
+                  <Button color="inherit">
+                    <Typography variant="subtitle1" className={classes.navbtns}>
+                      Contact
+                    </Typography>
+                    </Button>
+                  <Button  color="secondary" variant="outlined">
+                    <Typography variant="subtitle1" className={classes.donatebtn}>
+                      Donate
+                    </Typography>
+                  </Button>
+
+                </Container>
+              </Toolbar>
+          </AppBar>
+          <Divider/>
+
+              <img src={HomeBanner} className="banner" />
+
+          <Divider/>
+              
+          <Grid container className={classes.root} spacing={2} >
+            <Grid item xs={12}>
+              <Grid container className={classes.grid} justify="center" >
+
+                {
+                  cards.map((card, index) => (
+                    <DonateCard key={index} title={card.title} msg={card.msg} img={card.img}/>
+                  ))
+                }
+
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Divider/>
+          
+            <Container className={classes.enycontainer}>
+              
+              <img src={ENYLogo} className={classes.enylogo} />
+
+              <Typography variant="subtitle1" className={classes.title} >
+                FUNDS RECIEVED AT THE CANCER HOME ARE ACCOUNTED BY THE ERNST AND YOUNG CHARTERED ACCOUNTANTS.
+              </Typography>
+            </Container>
+
+          <Divider/>
+
+    
+          < Container>
+
+          { showNews ?  <Carousel news={news}/> : <div></div>}
+
 
           </Container>
 
-          <img src={CancerLogo2} className="App-logo"/>
-        </Toolbar>
+          <Divider/>
+
+          <  Container  className={classes.carousel}>
+
+          <About/>
+
+          </Container>
+
+          <Footer/>
+
+        </div>
+
+    </Route>
+
+    <Route path='/admin'>
+
+       { isAuthenticated ? <NewsAdminPanel authenticate={authenticate}/> : 
+          <Admin  authenticate={authenticate} ></Admin>
+       }
 
 
-        <Toolbar className={classes.navbar} >
-          <Container maxWidth="sm" >
-
-              <Button color="inherit" >
-                <Typography variant="subtitle1" className={classes.navbtns}>
-                  Home
-                </Typography>
-              </Button>
-
-              <Button color="inherit">
-                <Typography variant="subtitle1" className={classes.navbtns}>
-                  Services
-                </Typography>
-              </Button>
-
-              <Button color="inherit">
-                <Typography variant="subtitle1" className={classes.navbtns}>
-                  News
-                </Typography>
-                </Button>
-              <Button color="inherit">
-                <Typography variant="subtitle1" className={classes.navbtns}>
-                  Contact
-                </Typography>
-                </Button>
-              <Button  color="secondary" variant="outlined">
-                <Typography variant="subtitle1" className={classes.donatebtn}>
-                  Donate
-                </Typography>
-              </Button>
-
-            </Container>
-          </Toolbar>
-      </AppBar>
-      <Divider/>
-
-           <img src={HomeBanner} className="banner" />
-
-      <Divider/>
-           
-      <Grid container className={classes.root} spacing={2} >
-        <Grid item xs={12}>
-          <Grid container className={classes.grid} justify="center" >
-
-            {
-              cards.map((card, index) => (
-                <DonateCard key={index} title={card.title} msg={card.msg} img={card.img}/>
-              ))
-            }
-
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Divider/>
       
-        <Container className={classes.enycontainer}>
-          
-           <img src={ENYLogo} className={classes.enylogo} />
+    </Route>
 
-          <Typography variant="subtitle1" className={classes.title} >
-             FUNDS RECIEVED AT THE CANCER HOME ARE ACCOUNTED BY THE ERNST AND YOUNG CHARTERED ACCOUNTANTS.
-          </Typography>
-        </Container>
 
-      <Divider/>
+    </Router>
 
- 
-      <Container  className={classes.carousel}>
-
-       <Carousel news={news}/>
-
-      </Container>
-
-      <Divider/>
-
-      <Container  className={classes.carousel}>
-
-      <About/>
-
-      </Container>
-
-    </div>
   );
 }
 

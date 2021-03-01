@@ -97,13 +97,13 @@ const NewsCarousel = ({news}) => {
           
 
           <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper} elevation={0} >
+            <Paper className={classes.paper}  >
             <img src={process.env.REACT_APP_STATIC_FILE_URL + news[index].img_uri} className="banner"   onError={(e) => onError(e)}  style={status ? {} : {display: 'none'}}   onLoad={() => {setStatus(true)} }/>
             </Paper>
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={0}>
 
 
             <Container className={classes.paper}>
