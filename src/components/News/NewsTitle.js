@@ -35,8 +35,6 @@ const handleTitleDataChange =  (event) => {
         Basic News Information 
       </Typography>
       <Grid container spacing={3}>
-  
-
         <Grid item xs={12}>
           <TextField
             id="address2"
@@ -58,7 +56,6 @@ const handleTitleDataChange =  (event) => {
             autoComplete="shipping address-level2"
           />
         </Grid>
-
 
         <Grid item xs={12}  >
 

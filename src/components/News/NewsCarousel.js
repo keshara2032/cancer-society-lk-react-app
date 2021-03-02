@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import ImageNotFound from '../assets/no_img.png';
+import ImageNotFound from '../../assets/no_img.png';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 

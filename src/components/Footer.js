@@ -28,8 +28,9 @@ const useStyles = makeStyles({
     fontFamily: 'Poppins',
   },
   title:{
-    paddingBottom: 20,
-    margin:20,
+    paddingBottom: 5,
+    paddingTop:10,
+    margin:5,
     fontFamily: 'Poppins',
     fontWeight: 'fontWeightMedium',
     alignItems: 'center',
@@ -113,10 +114,7 @@ const Footer = () => {
                      </Typography>
 
                     <Typography variant="subtitle1"  className={classes.description}>
-                    The Kandy Branch of the Cancer Society was inaugurated in 1972. The Cancer Home was built in 1976 initiated by the parent body assisted by the community & well-wishes on a block of land given by the Ministry of Health close to the Kandy Hospital. 
-                    This building had originally Two wards which accommodated up to twenty cancer patients.
-                    The Cancer Home is now able to accommodate up to 70 cancer patients. These patients come from various parts of the Island for daily deep-ray treatment at the Kandy Hospital or those who are terminally ill and cannot be looked after in their own homes.
-                    Entire patient care including meals, medicines and personal day to day requirements are given free of charge. Other expenses including staff salaries, rates and taxes and maintenance of buildings are financed entirely from community support.
+                    The Sri Lanka Cancer Society is a voluntary organization of people working towards relieving Sri Lanka from the devastating effects of the scourge of cancer. Regardless of cultural, social or ideological background we are committed to provide any Cancer patient with the quality of life they deserve and the protection and security they require. Cancer is no longer a distant, empty threat, its effects are at your doorstep and its victims reside in the community around you; in this world of uncertainty we are a team dedicated to making the public aware that Cancer CAN be prevented and even cured with early detection and treatment.
                     </Typography>
                 </Container>
             </Toolbar>

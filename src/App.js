@@ -15,7 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 import CancerLogo from './assets/cancerlogo.png'
 import CancerLogo2 from './assets/cancer_logo.png'
@@ -28,12 +27,14 @@ import CAPImage from './assets/cap.jpg'
 import FosterImage from './assets/foster.jpg'
 
 import DonateCard from './components/DonateCard'
-import Carousel from './components/NewsCarousel'
+import Carousel from './components/News/NewsCarousel'
 import About from './components/About'
 import Footer from './components/Footer'
 import Admin from './components/Admin'
-import NewsAdminPanel from './components/NewsAdminPanel';
-
+import NewsAdminPanel from './components/News/NewsAdminPanel';
+import Facebook from './components/Facebook'
+import Services from './components/Services/Services'
+import {Link as RouteLink} from 'react-router-dom';
 
 const donate_card_message = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
 
@@ -71,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
   navbtns:{
     flexGrow: 1,
     fontFamily: 'Poppins',
-    marginRight: theme.spacing(2),
 
   },
   donatebtn:{
@@ -110,27 +110,20 @@ const useStyles = makeStyles((theme) => ({
   carousel:{
     flexGrow: 1,
     padding:'20px 20px 20px 20px ',
-  }
+  },
+  routeBtn:{
+    color:"#000",
+    fontFamily: 'Poppins',
+    fontWeight: 'fontWeightLight',
+    alignItems: 'center',
+  },
+  
 
 }));
 
 
 function App() {
 
-
-    const theme = createMuiTheme({
-      palette: {
-        primary: {
-            main: "#ad0045" // This is an orange looking color
-                  },
-        secondary: {
-            main: "#ad0045" //Another orange-ish color
-                    }
-              },
-  fontFamily: 'Poppins',
-  fontWeight: 'fontWeightLight',
-  alignItems: 'center',
-  });
 
 
   const classes = useStyles();
@@ -252,7 +245,7 @@ function App() {
 
                   <Button color="inherit">
                     <Typography variant="subtitle1" className={classes.navbtns}>
-                      Services
+                      <RouteLink to="/services" className={classes.routeBtn}>Services </RouteLink>
                     </Typography>
                   </Button>
 
@@ -308,38 +301,48 @@ function App() {
 
           <Divider/>
 
-    
+{/* News Carousel     */}
           < Container>
-
           { showNews ?  <Carousel news={news}/> : <div></div>}
-
-
           </Container>
 
           <Divider/>
 
-          <  Container  className={classes.carousel}>
 
-          <About/>
 
+{/* Facebook section and Map */}
+
+
+<Facebook></Facebook>
+
+
+{/* About Section */}
+          < Container  className={classes.carousel}>
+            <About/>
           </Container>
 
           <Footer/>
 
         </div>
 
+
+
     </Route>
+
+    <Route path='/services'>
+
+                <Services/>
+
+    </Route>
+
 
     <Route path='/admin'>
 
-       { isAuthenticated ? <NewsAdminPanel authenticate={authenticate}/> : 
-          <Admin  authenticate={authenticate} ></Admin>
-       }
+        { isAuthenticated ? <NewsAdminPanel authenticate={authenticate}/> : 
+            <Admin  authenticate={authenticate} ></Admin>
+        }
 
-
-      
     </Route>
-
 
     </Router>
 
