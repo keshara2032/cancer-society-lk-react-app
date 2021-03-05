@@ -15,7 +15,14 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import {Link as RouteLink} from 'react-router-dom';
 
-
+import Accomodation from './Accomodation'
+import Footer from '../Footer'
+import Dining from './Dining'
+import Counselling from './Counselling'
+import Foster from './Foster'
+import Drugs from './Drugs'
+import Awareness from './Awareness'
+import Education from './Education'
 
 import CancerLogo from '../../assets/cancerlogo.png'
 import CancerLogo2 from '../../assets/cancer_logo.png'
@@ -26,7 +33,8 @@ const useStyles = makeStyles({
       fontWeight: 'fontWeightLight',
       alignItems: 'center',
       justifyContent:'center',
-      display:'flex'
+      display:'flex',
+      
     },
     text:{
         fontFamily: 'Poppins',
@@ -95,6 +103,8 @@ const Services = () => {
 
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+
+    const about = true;
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -126,7 +136,7 @@ const Services = () => {
 
                   <Button color="inherit" >
                     <Typography variant="subtitle1" className={classes.navbtns}>
-                      Home
+                    <RouteLink to="/" className={classes.routeBtn}>Home </RouteLink>
                     </Typography>
                   </Button>
 
@@ -136,11 +146,6 @@ const Services = () => {
                     </Typography>
                   </Button>
 
-                  <Button color="inherit">
-                    <Typography variant="subtitle1" className={classes.navbtns}>
-                      News
-                    </Typography>
-                    </Button>
                   <Button color="inherit">
                     <Typography variant="subtitle1" className={classes.navbtns}>
                       Contact
@@ -169,7 +174,6 @@ const Services = () => {
                     className={classes.text}
                     variant="scrollable"
                     scrollButtons="off"
-
                 >
                     
                     <Tab className={classes.text} label="Accommodation Facilities" />
@@ -181,9 +185,22 @@ const Services = () => {
                     <Tab  className={classes.text} label="Education Programme" />
 
                 </Tabs>
+               
+  
+                
         </Paper>
 
 
+        {value === 0 && <Accomodation/>}
+        {value === 1 && <Dining/>}
+        {value === 2 && <Counselling/>}
+        {value === 3 && <Foster/>}
+        {value === 4 && <Drugs/>}
+        {value === 5 && <Awareness/>}
+        {value === 6 && <Education/>}
+
+
+        <Footer about={about} />
 
 </div>
 

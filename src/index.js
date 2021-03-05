@@ -11,7 +11,7 @@ require('dotenv').config()
 const theme = createMuiTheme({
   palette: {
     primary: {
-        main: "#ad0045" // This is an orange looking color
+        main: "#f54272" // This is an orange looking color
               },
     secondary: {
         main: "#ad0045" //Another orange-ish color

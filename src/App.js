@@ -239,7 +239,7 @@ function App() {
 
                   <Button color="inherit" >
                     <Typography variant="subtitle1" className={classes.navbtns}>
-                      Home
+                      <RouteLink to="/" className={classes.routeBtn}>Home </RouteLink>
                     </Typography>
                   </Button>
 
@@ -249,11 +249,12 @@ function App() {
                     </Typography>
                   </Button>
 
-                  <Button color="inherit">
+                  {/* <Button color="inherit">
                     <Typography variant="subtitle1" className={classes.navbtns}>
                       News
                     </Typography>
-                    </Button>
+                    </Button> */}
+
                   <Button color="inherit">
                     <Typography variant="subtitle1" className={classes.navbtns}>
                       Contact

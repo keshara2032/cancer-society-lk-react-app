@@ -54,6 +54,8 @@ const useStyles = makeStyles({
   },
   appbar2:{
     background:"#ad0045",
+      top: 'auto',
+      bottom: 0,
   },
   copyright:{
     fontFamily: 'Poppins',
@@ -96,7 +98,7 @@ const useStyles = makeStyles({
 
 
 
-const Footer = () => {
+const Footer = (about) => {
     const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -104,6 +106,7 @@ const Footer = () => {
         <div>
 
             <AppBar position="static" color="transparent" className={classes.appbar}  elevation={0}
+            hidden={about}
             >
 
             <Toolbar  >
@@ -121,34 +124,33 @@ const Footer = () => {
 
             </AppBar>       
 
-            <AppBar position="static"  className={classes.appbar2}  elevation={0}
-            >
+        <AppBar position="sticky"  className={classes.appbar2}  elevation={0}
+        >
 
         <Toolbar className={classes.navbar} >
           <Container maxWidth="sm" >
 
               <Button color="inherit" >
+
                 <Typography variant="subtitle1" className={classes.navbtns}>
-                  Home
+                <RouteLink to="/" className={classes.routeBtn} >Home </RouteLink>
                 </Typography>
+
               </Button>
 
               <Button color="inherit">
                 <Typography variant="subtitle1" className={classes.navbtns}>
-                  Services
+                <RouteLink to="/services" className={classes.routeBtn}>Services </RouteLink>
                 </Typography>
               </Button>
 
-              <Button color="inherit">
-                <Typography variant="subtitle1" className={classes.navbtns}>
-                  News
-                </Typography>
-                </Button>
+        
               <Button color="inherit">
                 <Typography variant="subtitle1" className={classes.navbtns}>
                   Contact
                 </Typography>
                 </Button>
+
               <Button  color="inherit" variant="outlined">
                 <Typography variant="subtitle1" className={classes.donatebtn}>
                   Donate
@@ -158,7 +160,6 @@ const Footer = () => {
 
               <Button  color="inherit">
                 <Typography variant="subtitle1" >
-                  
                   <RouteLink to="/admin" className={classes.routeBtn}>Admin </RouteLink>
                 </Typography>
               </Button>
