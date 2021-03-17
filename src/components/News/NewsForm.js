@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import NewsTitle from './NewsTitle';
 import NewsBody from './NewsBody';
 import NewsReview from './NewsReview';
+import { Container } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -81,12 +82,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const steps = ['News Title', 'News Description', 'Image for the News Post'];
+const steps = ['News Title', 'News Description', 'Summary'];
 
 
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [disabled, setDisabled] = React.useState(false)
 
   const [newsTitle,setNewsTitle] = React.useState("")
   const [newsLocation,setNewsLocation] = React.useState("")
@@ -95,29 +97,66 @@ export default function Checkout() {
   const [newsImage,setNewsImage] = React.useState(null)
 
 
-  const handleNewsData = (newsData) => {
+  React.useEffect(() => {
+    // Update the document title using the browser API
 
-      setNewsTitle(newsData.title)
-      setNewsLocation(newsData.location)
-      setNewsDate(newsData.date)
-      setNewsBody(newsData.body)
-      setNewsImage(newsData.image)
+    if(activeStep == 0){
 
+        if(newsTitle == "" || newsLocation == ""){
+          setDisabled(true)
+        }else{
+          setDisabled(false)
+        }
+    }
+    else if(activeStep == 1){
+
+      if(newsBody == "" || newsImage == null){
+        setDisabled(true)
+      }else{
+        setDisabled(false)
+      }
   }
 
-  
+
+
+  });
+
+
+
+  const handleNewsTitleData = (newsData) => {
+      setNewsTitle(newsData.title)
+  }
+
+  const handleNewsLocationData = (newsData) => {
+    setNewsLocation(newsData.location)
+  }
+
+  const handleNewsDateData = (newsData) => {
+    setNewsDate(newsData.date)
+  }
+
+  const handleNewsBodyData = (newsData) => {
+    setNewsBody(newsData.body)
+  }
+
+  const handleNewsImageData = (newsData) => {
+    setNewsImage(newsData.image)
+  }  
+
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <NewsTitle newsTitle={newsTitle} newsLocation={newsLocation} newsDate={newsDate} handleNewsData={handleNewsData}/>;
+        return <NewsTitle newsTitle={newsTitle} newsLocation={newsLocation} newsDate={newsDate} handleNewsTitleData={handleNewsTitleData} handleNewsLocationData={handleNewsLocationData} handleNewsDateData={handleNewsDateData} />;
       case 1:
-        return <NewsBody newsBody={newsBody} newsImage={newsImage} handleNewsData={handleNewsData} />;
+        return <NewsBody  newsBody={newsBody} newsImage={newsImage}  handleNewsBodyData={handleNewsBodyData} handleNewsImageData={handleNewsImageData}/>;
       case 2:
-        return <NewsReview newsTitle={newsTitle} newsLocation={newsLocation} newsDate={newsDate} newsBody={newsBody} newsImage={newsImage}  />;
+        return <NewsReview  newsTitle={newsTitle} newsLocation={newsLocation} newsDate={newsDate} newsBody={newsBody} newsImage={newsImage}  />;
       default:
         throw new Error('Unknown step');
     }
   }
+
+  
   
 
   const handleNext = () => {
@@ -125,7 +164,9 @@ export default function Checkout() {
     if(activeStep === steps.length - 1)
       {console.log('Now will upload to server')}
 
+
     setActiveStep(activeStep + 1);
+
   };
 
   const handleBack = () => {
@@ -135,6 +176,8 @@ export default function Checkout() {
   return (
     <React.Fragment>
       <CssBaseline />
+      <Container>
+
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center" className={classes.text}>
@@ -156,6 +199,8 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
+                <Container>
+
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
@@ -168,16 +213,21 @@ export default function Checkout() {
                     color="primary"
                     onClick={handleNext}
                     className={classes.button}
+                    disabled = {disabled}
                   >
                     {activeStep === steps.length - 1 ? 'Create News' : 'Next'}
                   </Button>
                 </div>
+                </Container>
+
               </React.Fragment>
             )}
           </React.Fragment>
         </Paper>
         <Copyright />
       </main>
+      </Container>
+
     </React.Fragment>
   );
 }

@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function NewsBodyForm({handleNewsData}) {
+export default function NewsBodyForm({handleNewsBodyData, handleNewsImageData, newsBody, newsImage}) {
 
   const useStyles = makeStyles((theme) => ({
     btn: {
@@ -35,12 +35,22 @@ export default function NewsBodyForm({handleNewsData}) {
     var unitCount = Math.round(characterCount/charsPerPageCount);
     setCharCount(characterCount)
 
+    handleNewsBodyData({
+      body : currentText
+    })
+
 }
 
    // On file select (from the pop up)
    const onFileChange = event => {
     // Update the state
     console.log(event.target.files[0])
+
+    handleNewsImageData({
+      image: event.target.files[0]
+    }
+    )
+
   };
 
 
@@ -56,7 +66,7 @@ const classes = useStyles();
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField required id="cardName" label={"Brief Description " + charCount + "/" + maxCharCount } fullWidth autoComplete="cc-name"  multiline 
-            variant="outlined"  rows={14} onChange={handleCharCount}  className={classes.text}
+            variant="outlined"  rows={14} onChange={handleCharCount}  className={classes.text} value={newsBody}
             inputProps={{
               maxLength: maxCharCount
             }}

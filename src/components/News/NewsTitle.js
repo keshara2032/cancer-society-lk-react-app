@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef }  from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import DateFnsUtils from '@date-io/date-fns';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -12,37 +13,61 @@ import {
 } from '@material-ui/pickers';
 
 
-export default function TitleForm({handleNewsData}) {
+export default function TitleForm({handleNewsTitleData, handleNewsLocationData, handleNewsDateData, newsTitle, newsLocation, newsDate}) {
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2021-01-01T21:11:54'))
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2021-01-18'));
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
+}
+  
 
-    //Handle title form data
+const handleDateChange = (date) => {
+  var convDate = convert(date);
+  setSelectedDate(convDate);
+  handleNewsDateData({
+    date : convDate
+  })
+};
+
+//Handle title form data
 const handleTitleDataChange =  (event) => {
-  event.preventDefault()
-    handleNewsData({
-      title : event.target.value
-    })
-  }
 
+  event.preventDefault()
+  handleNewsTitleData({
+    title : event.target.value
+  })
+
+}
+
+//Handle location form data
+const handleLocationDataChange =  (event) => {
+
+  event.preventDefault()
+  handleNewsLocationData({
+    location : event.target.value
+  })
+
+}
 
   return (
-    <React.Fragment>
+
+    <React.Fragment  >
       <Typography variant="h6" gutterBottom>
         Basic News Information 
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
-            id="address2"
-            name="address2"
+            id="title"
+            name="title"
             label="Title for the News Post"
+            value = {newsTitle}
             fullWidth
             required
-            autoComplete="shipping address-line2"
             onChange={handleTitleDataChange}
           />
         </Grid>
@@ -52,24 +77,27 @@ const handleTitleDataChange =  (event) => {
             id="city"
             name="city"
             label="Location"
+            value = {newsLocation}
             fullWidth
-            autoComplete="shipping address-level2"
+            onChange={handleLocationDataChange}
+
           />
         </Grid>
 
-        <Grid item xs={12}  >
+        <Grid item xs={12} >
+        
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} >
 
           <KeyboardDatePicker
               disableToolbar
               variant="inline"
-              format="MM/dd/yyyy"
+              format="dd-MM-yyyy"
               margin="normal"
               id="date-picker-inline"
               label="Date picker inline"
-              value={selectedDate}
               onChange={handleDateChange}
+              value={selectedDate}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
@@ -81,5 +109,6 @@ const handleTitleDataChange =  (event) => {
 
       </Grid>
     </React.Fragment>
+
   );
 }

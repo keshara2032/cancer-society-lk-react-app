@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import HomeBanner from './assets/homebanner.png'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -25,6 +24,7 @@ import MealImage from './assets/meal.jpg'
 import DrugsImage from './assets/drugs.jpg'
 import CAPImage from './assets/cap.jpg'
 import FosterImage from './assets/foster.jpg'
+import HomeBanner from './assets/homebanner.jpg'
 
 import DonateCard from './components/DonateCard'
 import Carousel from './components/News/NewsCarousel'
@@ -35,6 +35,7 @@ import NewsAdminPanel from './components/News/NewsAdminPanel';
 import Facebook from './components/Facebook'
 import Services from './components/Services/Services'
 import {Link as RouteLink} from 'react-router-dom';
+import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
 
 const donate_card_message = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
 
@@ -136,7 +137,8 @@ function App() {
   useEffect(() => {
     const getNews = async () => {
       const newsFromServer = await fetchNews()
-      if(newsFromServer.length == 0 || newsFromServer.status != 200){
+
+      if(newsFromServer.length == 0 ){
         setShowNews(false)
       }else{
         setShowNews(true)
@@ -202,9 +204,9 @@ function App() {
   };
     
     const res = await fetch("http://localhost:8080/api/news",requestOptions)
+    
     const data = await res.json()
 
-    console.log(data)
     return data
 
   }
