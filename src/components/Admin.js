@@ -109,13 +109,12 @@ const fetchLogin =  async () => {
       method: "POST",
       headers: {
         'Accept': 'application/json',
-                  'Content-Type': ' application/json',
+        'Content-Type': ' application/json',
               },
       body: JSON.stringify({username, password})
   };
 
-  const res = await fetch( process.env.REACT_APP_API_LOGIN_URL,requestOptions)
-
+  const res = await fetch( process.env.REACT_APP_LOGIN_API_URL,requestOptions)
 
   const data = await res.json()
 

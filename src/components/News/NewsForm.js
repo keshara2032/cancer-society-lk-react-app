@@ -122,6 +122,72 @@ export default function Checkout() {
   });
 
 
+    // Submit News Post to Server
+    const createPost = async () => {
+
+    //   var bodyFormData = new FormData();
+
+
+    //   bodyFormData.append('file', newsImage);
+    //   // bodyFormData.append( 'news', new Blob([JSON.stringify( { title: newsTitle, description: newsBody})], {
+    //   //                       type: 'application/json'
+    //   //                      }), 'news');
+
+    //   bodyFormData.append( 'title', newsTitle);
+    //   bodyFormData.append( 'body', newsBody);
+
+    
+    //   const requestOptions = {
+    //     method: "POST",
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'multipart/form-data',
+    //       'Authorization': "Bearer "+localStorage.getItem('Token'),
+
+    //     },
+    //     data: bodyFormData
+
+    // };
+
+
+    //       // Display the key/value pairs
+    //   for (var value  of bodyFormData.values()) {
+    //     console.log(value);
+    //   }
+      
+    //   const res = await fetch(process.env.REACT_APP_CREATE_NEWS_API_URL,requestOptions)
+    //   const data = await res.json()
+
+
+
+  
+    //   return data
+
+
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer "+localStorage.getItem('Token'));
+      
+      var formdata = new FormData();
+      formdata.append("file", newsImage);
+      formdata.append("title", newsTitle);
+      formdata.append("body", newsBody);
+      
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+      
+      await fetch(process.env.REACT_APP_CREATE_NEWS_API_URL, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+  
+    }
+  
+
 
   const handleNewsTitleData = (newsData) => {
       setNewsTitle(newsData.title)
@@ -162,7 +228,12 @@ export default function Checkout() {
   const handleNext = () => {
 
     if(activeStep === steps.length - 1)
-      {console.log('Now will upload to server')}
+      {
+
+        console.log('Now will upload to server')
+        console.log(createPost())
+
+      }
 
 
     setActiveStep(activeStep + 1);

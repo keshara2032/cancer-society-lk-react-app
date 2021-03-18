@@ -106,7 +106,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     direction:'row',
     justify:'center',
-    alignItems:'center'
+    alignItems:'center',
+    padding:'40px'
   },
   carousel:{
     flexGrow: 1,
@@ -138,7 +139,9 @@ function App() {
     const getNews = async () => {
       const newsFromServer = await fetchNews()
 
-      if(newsFromServer.length == 0 ){
+      console.log(newsFromServer)
+
+      if(newsFromServer.status == 404){
         setShowNews(false)
       }else{
         setShowNews(true)
@@ -164,7 +167,7 @@ function App() {
   }, [])
 
 
-  // Fetch all News
+  // Authenticate User
   const authenticateUser = async () => {
     
     const requestOptions = {
@@ -175,8 +178,7 @@ function App() {
               },
   };
     
-
-    const res = await fetch("http://localhost:8080/api/authenticate",requestOptions)
+    const res = await fetch(process.env.REACT_APP_AUTHENTICATE_API_URL,requestOptions)
     const data = await res.json()
 
     return data
@@ -203,7 +205,7 @@ function App() {
               },
   };
     
-    const res = await fetch("http://localhost:8080/api/news",requestOptions)
+    const res = await fetch(process.env.REACT_APP_NEWS_API_URL,requestOptions)
     
     const data = await res.json()
 
@@ -297,7 +299,7 @@ function App() {
               
               <img src={ENYLogo} className={classes.enylogo} />
 
-              <Typography variant="subtitle1" className={classes.title} >
+              <Typography variant="subtitle2" className={classes.title} >
                 FUNDS RECIEVED AT THE CANCER HOME ARE ACCOUNTED BY THE ERNST AND YOUNG CHARTERED ACCOUNTANTS.
               </Typography>
             </Container>

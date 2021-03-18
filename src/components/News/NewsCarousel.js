@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import ImageNotFound from '../../assets/no_img.png';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -107,11 +108,12 @@ const NewsCarousel = ({news}) => {
 
 
             <Container className={classes.paper}>
-                <Typography variant="h2"  className={classes.title}>
+                <Typography variant="h4"  className={classes.title}>
                   Latest News
                 </Typography>
             </Container>
 
+            <Divider></Divider>
 
               <Container>
 
