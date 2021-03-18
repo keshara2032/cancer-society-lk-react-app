@@ -99,7 +99,7 @@ const NewsCarousel = ({news}) => {
 
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}  >
-            <img src={news[index].img_uri} className="banner" loading="lazy"  onError={(e) => onError(e)}  style={status ? {} : {display: 'none'}}   onLoad={() => {setStatus(true)} }/>
+            <img src={news[index].img_uri} className="banner"  onError={(e) => onError(e)}  style={status ? {} : {display: 'none'}}   onLoad={() => {setStatus(true)} }/>
             </Paper>
           </Grid>
 
