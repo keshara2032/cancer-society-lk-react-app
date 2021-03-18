@@ -1,5 +1,5 @@
 import React from 'react'
-import AboutImage from '../assets/about.png'
+import AboutImage from '../assets/about.jpg'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper'
 import { Container } from "@material-ui/core";
