@@ -16,7 +16,6 @@ import Divider from '@material-ui/core/Divider';
 import {Link as RouteLink} from 'react-router-dom';
 
 import Footer from './Footer'
-import GoogleMapReact from 'google-map-react';
 import Map from './Map'
 import Committee from './Committee'
 import Address from './Address'
