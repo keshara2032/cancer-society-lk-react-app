@@ -15,18 +15,28 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import {Link as RouteLink} from 'react-router-dom';
 
-import Accomodation from './Accomodation'
-import Footer from '../Footer'
-import Dining from './Dining'
-import Counselling from './Counselling'
-import Foster from './Foster'
-import Drugs from './Drugs'
-import Awareness from './Awareness'
-import Education from './Education'
-import ApplicationBar from '../ApplicationBar'
+import Footer from './Footer'
+import GoogleMapReact from 'google-map-react';
+import Map from './Map'
+import Committee from './Committee'
+import Address from './Address'
+import ApplicationBar from './ApplicationBar'
 
-import CancerLogo from '../../assets/cancerlogo.png'
-import CancerLogo2 from '../../assets/cancer_logo.png'
+import CancerLogo from '../assets/cancerlogo.png'
+import CancerLogo2 from '../assets/cancer_logo.png'
+
+
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+
+const defaultProps = {
+    center: {
+      lat: 7.28,
+      lng: 80.63
+    },
+    zoom: 11
+  };
+
 const useStyles = makeStyles({
     root: {
       flexGrow: 1,
@@ -99,69 +109,45 @@ const useStyles = makeStyles({
 
   });
 
-  
-const Services = () => {
+const Contact = () => {
 
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
 
-    const about = true;
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-
-    
     return (
-
         <div className="App">
-
+            
           <ApplicationBar/>
-  
+
           <Divider/>
 
+{/* OpenStreetMap */}
+        <div >
+            <Map/>
+        </div>
 
-          <Paper className={classes.root}>
+{/* Committee */}
 
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    className={classes.text}
-                    variant="scrollable"
-                    scrollButtons="off"
-                >
-                    
-                    <Tab className={classes.text} label="Accommodation Facilities" />
-                    <Tab className={classes.text} label="Patient Meals" />
-                    <Tab  className={classes.text} label="Counselling Centre" />
-                    <Tab  className={classes.text} label="Foster Parent Scheme" />
-                    <Tab  className={classes.text} label="Provision of Cancer Drugs" />
-                    <Tab wrapped className={classes.text} label="Cancer Awareness Programmes" />
-                    <Tab  className={classes.text} label="Education Programme" />
+        <Container>
 
-                </Tabs>
-               
-  
-                
-        </Paper>
+            <Committee/>
+
+        </Container>
+
+        <Divider/>
+
+{/* Address & Contact Details */}
+
+        <Container>
+            
+            <Address/>
+
+        </Container>
 
 
-        {value === 0 && <Accomodation/>}
-        {value === 1 && <Dining/>}
-        {value === 2 && <Counselling/>}
-        {value === 3 && <Foster/>}
-        {value === 4 && <Drugs/>}
-        {value === 5 && <Awareness/>}
-        {value === 6 && <Education/>}
-
-
-        <Footer about={about} />
+        <Footer />
 
 </div>
-
     )
 }
 
-export default Services
+export default Contact

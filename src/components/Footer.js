@@ -147,7 +147,7 @@ const Footer = (about) => {
         
               <Button color="inherit">
                 <Typography variant="subtitle1" className={classes.navbtns}>
-                  Contact
+                <RouteLink to="/contact" className={classes.routeBtn}>Contact </RouteLink>
                 </Typography>
                 </Button>
 

@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
 
   title:{
     fontFamily: 'Poppins',
-    fontWeight: 'fontWeightHeavy'
+    fontWeight: 'fontWeightHeavy',
+    fontSize:'30px'
   },
  
   newsBody:{
@@ -108,8 +109,8 @@ const NewsCarousel = ({news}) => {
 
 
             <Container className={classes.paper}>
-                <Typography variant="h4"  className={classes.title}>
-                  Latest News
+                <Typography variant="OVERLINE"  className={classes.title}>
+                  LATEST NEWS
                 </Typography>
             </Container>
 

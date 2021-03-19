@@ -26,6 +26,7 @@ import CAPImage from './assets/cap.jpg'
 import FosterImage from './assets/foster.jpg'
 import HomeBanner from './assets/homebanner.jpg'
 
+import ApplicationBar from './components/ApplicationBar'
 import DonateCard from './components/DonateCard'
 import Carousel from './components/News/NewsCarousel'
 import About from './components/About'
@@ -34,15 +35,21 @@ import Admin from './components/Admin'
 import NewsAdminPanel from './components/News/NewsAdminPanel';
 import Facebook from './components/Facebook'
 import Services from './components/Services/Services'
+import Contact from './components/Contact'
+import Committee from './components/Committee'
+
 import {Link as RouteLink} from 'react-router-dom';
 import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
 
-const donate_card_message = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
+const drugs = {acc_num:"1002740501", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
+const meals = {acc_num:"1000665301", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
+const general = {acc_num:"1002740502", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
+const foster = {acc_num:"1002740502", bank_details:"Commercial Bank - Kandy", sc:"CCEYLKLX"};
 
-const card1 = { title:"Donate for Meals",  msg: donate_card_message, img:MealImage }
-const card2 = { title: "Donate for Drugs",  msg: donate_card_message, img:DrugsImage }
-const card3 = { title: "Donate for Awareness",  msg: donate_card_message, img:CAPImage }
-const card4 = { title: "Donate for Foster Parents",  msg: donate_card_message, img:FosterImage }
+const card1 = { title:"Donate for Meals",  msg: meals, img:MealImage }
+const card2 = { title: "Donate for Drugs",  msg: drugs, img:DrugsImage }
+const card3 = { title: "Donate for Awareness",  msg: general, img:CAPImage }
+const card4 = { title: "Donate for Foster Parents",  msg: foster, img:FosterImage }
 
 const cards = [card1,card2,card3,card4]
 
@@ -222,57 +229,8 @@ function App() {
  
         <div className="App">
 
-          <AppBar position="static" color="transparent" className={classes.appbar}  elevation={0}>
-            <Toolbar >
-              <img src={CancerLogo} className="App-logo"/>
+          <ApplicationBar/>
 
-              <Container maxWidth="sm">
-
-              <h5 className="AppBarTitle">
-                Sri Lanka Cancer Society
-              </h5>
-
-              </Container>
-
-              <img src={CancerLogo2} className="App-logo"/>
-            </Toolbar>
-
-
-            <Toolbar className={classes.navbar} >
-              <Container maxWidth="sm" >
-
-                  <Button color="inherit" >
-                    <Typography variant="subtitle1" className={classes.navbtns}>
-                      <RouteLink to="/" className={classes.routeBtn}>Home </RouteLink>
-                    </Typography>
-                  </Button>
-
-                  <Button color="inherit">
-                    <Typography variant="subtitle1" className={classes.navbtns}>
-                      <RouteLink to="/services" className={classes.routeBtn}>Services </RouteLink>
-                    </Typography>
-                  </Button>
-
-                  {/* <Button color="inherit">
-                    <Typography variant="subtitle1" className={classes.navbtns}>
-                      News
-                    </Typography>
-                    </Button> */}
-
-                  <Button color="inherit">
-                    <Typography variant="subtitle1" className={classes.navbtns}>
-                      Contact
-                    </Typography>
-                    </Button>
-                  <Button  color="secondary" variant="outlined">
-                    <Typography variant="subtitle1" className={classes.donatebtn}>
-                      Donate
-                    </Typography>
-                  </Button>
-
-                </Container>
-              </Toolbar>
-          </AppBar>
           <Divider/>
 
               <img src={HomeBanner} className="banner" />
@@ -321,10 +279,23 @@ function App() {
 <Facebook></Facebook>
 
 
+{/* Committee Section */}
+
+< Container  className={classes.carousel}>
+<Committee/>
+</Container>
+
+<Divider/>
+
 {/* About Section */}
-          < Container  className={classes.carousel}>
-            <About/>
-          </Container>
+
+< Container  className={classes.carousel}>
+  <About/>
+</Container>
+
+
+<Divider/>
+
 
           <Footer/>
 
@@ -346,6 +317,12 @@ function App() {
         { isAuthenticated ? <NewsAdminPanel authenticate={authenticate}/> : 
             <Admin  authenticate={authenticate} ></Admin>
         }
+
+    </Route>
+
+    <Route path='/contact'>
+
+          <Contact/>
 
     </Route>
 
