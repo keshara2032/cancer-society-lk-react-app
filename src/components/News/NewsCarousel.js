@@ -61,12 +61,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const NewsCarousel = ({news}) => {
+const NewsCarousel = ({news, newsLength}) => {
 
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
   const [status, setStatus] = React.useState(false);
-  const [seconds, setSeconds] = useState(0);
+  const [news_length, set_news_length] = React.useState(0);
 
   const no_of_news = news.length
 
@@ -87,16 +87,22 @@ const NewsCarousel = ({news}) => {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex(index => (index + 1)%news.length);
-    }, 8000);
+    set_news_length(newsLength)
+  })
+
+
+  
+  useEffect(() => {
+    const interval = setInterval(  () => {
+      if(news_length>0)
+        setIndex(index => (index + 1)%news_length);
+    }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
     return (
 
        <Grid container spacing={1}>
-          
 
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}  >
@@ -109,7 +115,7 @@ const NewsCarousel = ({news}) => {
 
 
             <Container className={classes.paper}>
-                <Typography variant="OVERLINE"  className={classes.title}>
+                <Typography variant="overline"  className={classes.title}>
                   LATEST NEWS
                 </Typography>
             </Container>

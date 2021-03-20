@@ -24,7 +24,7 @@ import MealImage from './assets/meal.jpg'
 import DrugsImage from './assets/drugs.jpg'
 import CAPImage from './assets/cap.jpg'
 import FosterImage from './assets/foster.jpg'
-import HomeBanner from './assets/homebanner.jpg'
+import HomeBanner from './assets/homebanner.svg'
 
 import ApplicationBar from './components/ApplicationBar'
 import DonateCard from './components/DonateCard'
@@ -139,6 +139,7 @@ function App() {
 
   const [news, setNews] = useState([{"title":"","description":"","img_uri":""}])
   const [showNews, setShowNews] = useState(false)
+  const [newsLength, setNewsLength] = useState(0)
   const [isAuthenticated, setAuthenticated] = useState(false)
 
 
@@ -153,6 +154,7 @@ function App() {
       }else{
         setShowNews(true)
         setNews(newsFromServer)
+        setNewsLength(newsFromServer.length)
       }
 
     }
@@ -213,7 +215,6 @@ function App() {
   };
     
     const res = await fetch(process.env.REACT_APP_NEWS_API_URL,requestOptions)
-    
     const data = await res.json()
 
     return data
@@ -266,7 +267,7 @@ function App() {
 
 {/* News Carousel     */}
           < Container>
-          { showNews ?  <Carousel news={news}/> : <div></div>}
+          { showNews ?  <Carousel news={news} newsLength={newsLength}/> : <div></div>}
           </Container>
 
           <Divider/>

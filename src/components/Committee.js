@@ -155,7 +155,7 @@ const Committee = () => {
                   cards.map((card, index) => (
 
 
-                    <Paper className={classes.paper} elevation={0}>
+                    <Paper key={index} className={classes.paper} elevation={0}>
                     <Avatar alt="Remy Sharp" className={ index%2 === 0 ? classes.orange : classes.purple} src={card.img === null ?   null : card.img } >
                       {card.img === null ?   card.initial : '' }
                     </Avatar>
