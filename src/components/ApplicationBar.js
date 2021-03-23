@@ -15,10 +15,12 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import {Link as RouteLink} from 'react-router-dom';
 
+import DonageDialog from './DonateCard'
 
 
 import CancerLogo from '../assets/cancerlogo.png'
 import CancerLogo2 from '../assets/cancer_logo.png'
+import DonateDialog from './DonateDialog';
 
 
 const useStyles = makeStyles({
@@ -94,9 +96,20 @@ const useStyles = makeStyles({
 });
 
 
+
 const ApplicationBar = () => {
 
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
     return (
         <div>
@@ -138,7 +151,7 @@ const ApplicationBar = () => {
                     </Typography>
                   </Button>
 
-                  <Button  color="secondary" variant="outlined">
+                  <Button  color="secondary" variant="outlined" onClick={handleClickOpen}>
                     <Typography variant="subtitle1" className={classes.donatebtn}>
                       Donate
                     </Typography>
@@ -147,6 +160,8 @@ const ApplicationBar = () => {
                 </Container>
               </Toolbar>
           </AppBar>
+
+          <DonateDialog handleClose={handleClose} open={open}/>
            
         </div>
     )

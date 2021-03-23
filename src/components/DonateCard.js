@@ -7,6 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Container } from "@material-ui/core";
+
+import {
+    FacebookShareCount,
+    FacebookShareButton,
+    FacebookIcon } from  "react-share";
+
 
 const useStyles = makeStyles({
     root: {
@@ -23,7 +30,8 @@ const useStyles = makeStyles({
       },
   });
 
-
+const shareUrl = 'https://www.cancerhomekandy.com'
+const quote = "Giving is not just about a decision... It's about making a difference...  Let us contribute however we can for a better future!"
 const DonateCard = ({title, msg, img}) => {
 
     const classes = useStyles();
@@ -34,7 +42,6 @@ const DonateCard = ({title, msg, img}) => {
             <CardMedia
             className={classes.media}
             image={img}
-            title="Contemplative Reptile"
             />
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
@@ -53,12 +60,22 @@ const DonateCard = ({title, msg, img}) => {
             </CardContent>
         </CardActionArea>
         <CardActions>
-            <Button size="small" color="primary">
-            Share
-            </Button>
-            <Button size="small" color="primary">
-            Learn More
-            </Button>
+            <Container>
+
+           <FacebookShareButton
+            url={shareUrl}
+            quote={quote}
+            className="Demo__some-network__share-button"
+           >
+             {/* <FacebookIcon size={32} square /> */}
+
+             <Typography variant="h6" className={classes.title}  >
+                Share
+            </Typography>
+          </FacebookShareButton>
+
+          </Container>
+
         </CardActions>
         </Card>
     )
