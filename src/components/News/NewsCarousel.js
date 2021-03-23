@@ -128,6 +128,13 @@ const NewsCarousel = ({news, newsLength}) => {
                     {news[index].title}
               </Typography>
 
+
+              <Typography variant="h6" className={classes.newsTitle} >
+                    {news[index].date}
+              </Typography>
+
+
+
               <Typography variant="body1" className={classes.newsBody}  >
                   {news[index].description}
               </Typography>

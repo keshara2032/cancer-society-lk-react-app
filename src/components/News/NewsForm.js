@@ -125,45 +125,6 @@ export default function Checkout() {
     // Submit News Post to Server
     const createPost = async () => {
 
-    //   var bodyFormData = new FormData();
-
-
-    //   bodyFormData.append('file', newsImage);
-    //   // bodyFormData.append( 'news', new Blob([JSON.stringify( { title: newsTitle, description: newsBody})], {
-    //   //                       type: 'application/json'
-    //   //                      }), 'news');
-
-    //   bodyFormData.append( 'title', newsTitle);
-    //   bodyFormData.append( 'body', newsBody);
-
-    
-    //   const requestOptions = {
-    //     method: "POST",
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'multipart/form-data',
-    //       'Authorization': "Bearer "+localStorage.getItem('Token'),
-
-    //     },
-    //     data: bodyFormData
-
-    // };
-
-
-    //       // Display the key/value pairs
-    //   for (var value  of bodyFormData.values()) {
-    //     console.log(value);
-    //   }
-      
-    //   const res = await fetch(process.env.REACT_APP_CREATE_NEWS_API_URL,requestOptions)
-    //   const data = await res.json()
-
-
-
-  
-    //   return data
-
-
 
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer "+localStorage.getItem('Token'));
@@ -172,6 +133,7 @@ export default function Checkout() {
       formdata.append("file", newsImage);
       formdata.append("title", newsTitle);
       formdata.append("body", newsBody);
+      formdata.append("date", newsDate);
       
       var requestOptions = {
         method: 'POST',

@@ -137,7 +137,7 @@ function App() {
 
   const classes = useStyles();
 
-  const [news, setNews] = useState([{"title":"","description":"","img_uri":""}])
+  const [news, setNews] = useState([{"title":"","description":"","img_uri":"","date":""}])
   const [showNews, setShowNews] = useState(false)
   const [newsLength, setNewsLength] = useState(0)
   const [isAuthenticated, setAuthenticated] = useState(false)
