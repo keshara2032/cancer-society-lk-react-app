@@ -14,6 +14,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
 import {Link as RouteLink} from 'react-router-dom';
 import Box from '@material-ui/core/Box';
+import DonateDialog from './DonateDialog';
 
 
 const useStyles = makeStyles({
@@ -102,6 +103,16 @@ const Footer = (about) => {
     const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
     return (
         <div>
 
@@ -151,7 +162,7 @@ const Footer = (about) => {
                 </Typography>
                 </Button>
 
-              <Button  color="inherit" variant="outlined">
+              <Button  color="inherit" variant="outlined" onClick={handleClickOpen}>
                 <Typography variant="subtitle1" className={classes.donatebtn}>
                   Donate
                 </Typography>
@@ -173,7 +184,10 @@ const Footer = (about) => {
 
           </Toolbar>
 
-            </AppBar>       
+            </AppBar>    
+
+          <DonateDialog handleClose={handleClose} open={open}/>
+
 
         </div>
 

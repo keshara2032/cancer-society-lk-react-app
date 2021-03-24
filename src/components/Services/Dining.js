@@ -154,7 +154,7 @@ const Dining = () => {
                               </Typography>
 
                               <Typography variant="subtitle1" gutterBottom className={classes.list_text} >
-                                   Rs. 3000.00
+                                   Rs. 4000.00
                                  </Typography>
 
                               </Container>
@@ -210,7 +210,7 @@ const Dining = () => {
                               </Typography>
 
                               <Typography variant="subtitle1" gutterBottom className={classes.list_text} >
-                                   Rs. 4000.00
+                                   Rs. 5000.00
                                  </Typography>
 
                               </Container>
@@ -239,7 +239,7 @@ const Dining = () => {
                               </Typography>
 
                               <Typography variant="subtitle1" gutterBottom className={classes.list_text} >
-                                   Rs. 3000.00
+                                   Rs. 4000.00
                                  </Typography>
 
                               </Container>

@@ -12,6 +12,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/Typography';
+import { Container } from "@material-ui/core";
+
+import Address from './Address'
+
+import DonateDialogBanner from '../assets/donatecardbanner.svg'
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -27,6 +33,40 @@ const useStyles = makeStyles((theme) => ({
     formControlLabel: {
       marginTop: theme.spacing(1),
     },
+    title: {
+      margin: 'auto',
+      width: 'fit-content',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontFamily: 'Poppins',
+      fontWeight: 'fontWeightLight',
+      color:"#f54272",
+
+    },
+    quote: {
+      margin: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontFamily: 'Poppins',
+      fontWeight: 'fontWeightLight',
+      fontSize:'16px'
+
+    },
+    dialogcontent: {
+      margin: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    button: {
+      fontFamily: 'Poppins',
+      fontWeight: 'fontWeightLight',
+    },
+    container:{
+      margin: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
+
   }));
 
 
@@ -61,17 +101,45 @@ const DonateDialog = ({open,handleClose}) => {
         maxWidth={maxWidth}
         open={open}
         onClose={handleClose}
+        scroll='body'
         aria-labelledby="max-width-dialog-title"
       >
-        <DialogTitle id="max-width-dialog-title">Optional sizes</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You can set my maximum width and whether to adapt or not.
+        <DialogTitle id="max-width-dialog-title"  className={classes.title} >
+            <Typography variant="h4" component={'span'} className={classes.title} >
+                Let's Donate
+            </Typography>
+          </DialogTitle>
+          
+        <DialogContent className={classes.dialogcontent} >
+
+          <DialogContentText   >
+
+
           </DialogContentText>
         
+
+          <img src={DonateDialogBanner} />
+
+         {/* <Container className={classes.container}>
+
+          <Typography variant="overline" className={classes.quote}>
+                "Giving is not just about a decision... It's about making a difference..."
+            </Typography>
+
+         </Container> */}
+
+         <Address/>
+
+
+
         </DialogContent>
+
+
+
+        
+
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary" className={classes.button}>
             Close
           </Button>
         </DialogActions>
