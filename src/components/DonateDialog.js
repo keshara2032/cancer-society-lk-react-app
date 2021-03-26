@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const DonateDialog = ({open,handleClose}) => {
+const DonateDialog = ({open,handleClose,img}) => {
 
   const classes = useStyles();
 
@@ -118,7 +118,7 @@ const DonateDialog = ({open,handleClose}) => {
           </DialogContentText>
         
 
-          <img src={DonateDialogBanner} />
+          <img src={img} />
 
          {/* <Container className={classes.container}>
 
