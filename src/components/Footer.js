@@ -88,7 +88,7 @@ const useStyles = makeStyles({
     return (
       <Typography variant="body2" color="inherit" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/" style={ {fontFamily:'Poppins'} }>
+        <Link color="inherit" href="" style={ {fontFamily:'Poppins'} }>
           General Solutions LK
         </Link>{' '}
         {new Date().getFullYear()}
